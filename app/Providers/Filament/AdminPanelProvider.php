@@ -32,7 +32,11 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->font('Vazirmatn', provider: \Filament\FontProviders\BunnyFontProvider::class)
+            ->font(
+                'Vazirmatn',
+                url: asset('fonts/vazirmatn/vazirmatn.css'),
+                provider: \Filament\FontProviders\LocalFontProvider::class,
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
