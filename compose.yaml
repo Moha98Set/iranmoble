@@ -25,6 +25,11 @@ services:
             - mysql
     mysql:
         image: 'mysql:8.4'
+        # Lets the non-SUPER 'sail' user create the activity_log append-only
+        # triggers while binary logging is on. Production needs the same
+        # setting, or the trigger migration must run as a SUPER user.
+        command:
+            - '--log_bin_trust_function_creators=1'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:

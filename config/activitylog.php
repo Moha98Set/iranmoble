@@ -8,10 +8,13 @@ return [
     'enabled' => env('ACTIVITY_LOGGER_ENABLED', true),
 
     /*
-     * When the clean-command is executed, all recording activities older than
-     * the number of days specified here will be deleted.
+     * The activity log is kept forever and is append-only, enforced by the
+     * no-update / no-delete triggers in the make_activity_log_append_only
+     * migration. Do NOT schedule activitylog:clean — it deletes rows and the
+     * triggers will reject it. Purging history is a deliberate decision to be
+     * made by hand, not a cron job.
      */
-    'delete_records_older_than_days' => 365,
+    'delete_records_older_than_days' => null,
 
     /*
      * If no log name is passed to the activity() helper
@@ -28,14 +31,14 @@ return [
     /*
      * If set to true, the subject returns soft deleted models.
      */
-    'subject_returns_soft_deleted_models' => false,
+    'subject_returns_soft_deleted_models' => true,
 
     /*
      * This model will be used to log activity.
      * It should implement the Spatie\Activitylog\Contracts\Activity interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'activity_model' => \Spatie\Activitylog\Models\Activity::class,
+    'activity_model' => \App\Models\Activity::class,
 
     /*
      * This is the name of the table that will be created by the migration and
