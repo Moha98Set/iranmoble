@@ -2,6 +2,7 @@
 
 namespace App\Casts;
 
+use App\Support\Digits;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,12 +31,14 @@ class Money implements CastsAttributes
 
         // Accept input that came back from a formatted field: "۱٬۲۰۰٬۰۰۰" or "1,200,000".
         if (is_string($value)) {
-            $value = strtr($value, [
-                '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4',
-                '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9',
-            ]);
+            $negative = str_starts_with(trim($value), '-');
+            $value = Digits::onlyNumbers($value);
 
-            $value = preg_replace('/[^0-9\-]/', '', $value);
+            if ($value === '') {
+                return null;
+            }
+
+            $value = $negative ? "-{$value}" : $value;
         }
 
         return (int) $value;
