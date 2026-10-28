@@ -28,3 +28,7 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Host-generated PHP settings (cPanel)
+/public/.user.ini
+/public/php.ini
