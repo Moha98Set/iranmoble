@@ -1,6 +1,15 @@
+/*
+ * Served from this host, never a CDN: fonts.bunny.net and fonts.googleapis.com
+ * time out from inside Iran and the panel then waits on them before painting.
+ *
+ * Only Regular and Bold exist as files, so the weight ranges below map 500 to
+ * Regular and 600 to Bold. Adding the variable font would give real 500/600/800.
+ */
+
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('../Vazirmatn-Regular.ttf') format('truetype');
+    src: url('../Vazirmatn-Regular.woff2') format('woff2'),
+         url('../Vazirmatn-Regular.ttf') format('truetype');
     font-weight: 400 500;
     font-style: normal;
     font-display: swap;
@@ -8,8 +17,9 @@
 
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('../Vazirmatn-Bold.ttf') format('truetype');
-    font-weight: 600 700;
+    src: url('../Vazirmatn-Bold.woff2') format('woff2'),
+         url('../Vazirmatn-Bold.ttf') format('truetype');
+    font-weight: 600 800;
     font-style: normal;
     font-display: swap;
 }

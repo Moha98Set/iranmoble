@@ -28,9 +28,31 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->brandName('ایران مبله')
+            // Mark only, not the full vertical lockup: the header strip is
+            // short and wide, so the stacked wordmark would be unreadable.
+            ->brandLogo(asset('images/logo-mark.svg'))
+            ->brandLogoHeight('2.25rem')
+            ->favicon(asset('images/logo-mark.svg'))
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                // Brand orange #F7931D. Filament maps the hue onto its own
+                // lightness ramp, so the button shade (600) lands darker than
+                // the raw brand colour — which is what keeps white label text
+                // readable on it.
+                'primary' => Color::hex('#F7931D'),
+
+                // Warm neutrals: cool greys read slightly off next to an
+                // orange brand.
+                'gray' => Color::Stone,
+
+                // Pulled apart in hue so they do not get mistaken for the
+                // orange primary.
+                'success' => Color::Emerald,
+                'danger' => Color::Red,
+                'info' => Color::Sky,
+                'warning' => Color::Yellow,
             ])
             ->font(
                 'Vazirmatn',
